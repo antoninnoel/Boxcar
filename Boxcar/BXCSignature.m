@@ -26,6 +26,8 @@
 
 #import "BXCSignature.h"
 #import <CommonCrypto/CommonHMAC.h>
+#import "BXCLogging.h"
+#import "BXCUtilities.h"
 
 @implementation BXCSignature
 
@@ -43,7 +45,7 @@
         
         NSData *HMAC = [[NSData alloc] initWithBytes:cHMAC length:CC_SHA1_DIGEST_LENGTH];
         
-        NSString *signature = [NSString stringWithString:[HMAC description]];
+        NSString *signature = [BXCUtilities formatedBytesFromDatas:HMAC];
         signature = [signature stringByReplacingOccurrencesOfString:@" " withString:@""];
         signature = [signature stringByReplacingOccurrencesOfString:@"<" withString:@""];
         signature = [signature stringByReplacingOccurrencesOfString:@">" withString:@""];
@@ -65,7 +67,8 @@
     else
         concat_char = @"?";
     path = [path stringByAppendingFormat:@"%@clientkey=%@&signature=%@", concat_char, key, signature];
-	
+    ECLog(DebugChannel,@"kikou %@",[absoluteURL stringByAppendingString:path]);
+
 	return [NSURL URLWithString:[absoluteURL stringByAppendingString:path]];
 }
 

@@ -26,7 +26,6 @@
 
 #import "BXCLogging.h"
 
-ECDefineLogChannel(MainChannel)
 ECDefineLogChannel(DebugChannel)
 
 @implementation BXCLogging
@@ -37,14 +36,6 @@ ECDefineLogChannel(DebugChannel)
     [lm startup];
     // No logging as default
     [lm disableAllChannels];
-}
-
-/* Enable or not MainChanel */
-+ (void)MainChannel:(BOOL)enabled {
-    if (enabled)
-        ECEnableChannel(MainChannel);
-    else
-        ECDisableChannel(MainChannel);
 }
 
 /* Enable or not DebugChanel */

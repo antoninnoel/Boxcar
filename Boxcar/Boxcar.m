@@ -32,6 +32,7 @@
 #import "BXCLogging.h"
 #import "BXCJSONRequestOperation.h"
 #import "BXCMobileProvision.h"
+#import "BXCUtilities.h"
 
 @import AdSupport.ASIdentifierManager;
 
@@ -43,58 +44,45 @@
 
 /* Always used the shared instance class method to access Boxcar instance singleton. */
 + (id)sharedInstance {
-	static Boxcar *sharedInstance = nil;
-	static dispatch_once_t token;
-	
-	dispatch_once(&token, ^{
-		sharedInstance = [Boxcar new];
-	});
-	
-	if (sharedInstance.settings == nil) { [sharedInstance loadDataFromDisk]; }
-	
-	return sharedInstance;
+    static Boxcar *sharedInstance = nil;
+    static dispatch_once_t token;
+    
+    dispatch_once(&token, ^{
+        sharedInstance = [Boxcar new];
+    });
+    
+    if (sharedInstance.settings == nil) { [sharedInstance loadDataFromDisk]; }
+    
+    return sharedInstance;
 }
 
 /**
  *  Setup the Boxcar service assuming all options are read from BoxcarConfig.plist in application NSBundle.
  *
  *  @return YES if registration was handled properly by Boxcar framework.
-**/
-- (BOOL)setup {
+ **/
+- (void)setup {
     NSDictionary *options = [self readOptionsFromPlist];
-	
+    
     if ([options count] == 0) {
         [NSException raise:@"No option found" format:@"Using [Boxcar start] without BoxcarConfig.plist of with empty file"];
-        return NO;
+        return;
     }
-	
-	return [self startWithOptions:@{kBXC_CLIENT_KEY: options[@"clientKey"],
-                                    kBXC_CLIENT_SECRET: options[@"clientSecret"],
-                                    kBXC_API_URL: options[@"apiUrl"],
-                                    kBXC_LOGGING: options[@"logging"]} error:nil];
-}
-
-/* Start services: Logging, Register Device, and set Mode */
-- (void)startWithOptions:(NSDictionary *)options andMode:(NSString *)mode completionBlock:(BXCStartCompletionBlock)completionBlock {
-  [[Boxcar sharedInstance] startWithOptions:options delegate:nil error:nil];
-	[[Boxcar sharedInstance] setMode:mode];
-	completionBlock(nil);
+    
+    [self startWithOptions:@{kBXC_CLIENT_KEY: options[@"clientKey"],
+                             kBXC_CLIENT_SECRET: options[@"clientSecret"],
+                             kBXC_API_URL: options[@"apiUrl"],
+                             kBXC_LOGGING: options[@"logging"]}];
 }
 
 /* Start services: Logging & Register Device */
-- (BOOL)startWithOptions:(NSDictionary *)options error:(NSError *)error {
-  [[Boxcar sharedInstance] startWithOptions:options delegate:nil error:nil];
-  return YES;
-}
-
-/* Start services: Logging, Register Device & Defines UNUserNotificationCenterDelegate */
-- (BOOL)startWithOptions:(NSDictionary *)options delegate:(id <UNUserNotificationCenterDelegate>)delegate error:(NSError *)error {
-    self.NCDelegate = delegate;
+- (void)startWithOptions:(NSDictionary *)options
+{
     self.clientKey = options[kBXC_CLIENT_KEY];
     self.clientSecret = options[kBXC_CLIENT_SECRET];
-	
+    
     if (options[kBXC_API_URL] && !self.apiURL) {
-		NSString *APIUrl = options[kBXC_API_URL];
+        NSString *APIUrl = options[kBXC_API_URL];
         self.apiURL = [NSURL URLWithString:APIUrl];
     } else {
         self.apiURL = [NSURL URLWithString:BXCDefaultAPIURL];
@@ -102,36 +90,52 @@
     
     if ([options[kBXC_LOGGING] isEqual: @YES]) {
         [BXCLogging startup];
-        [BXCLogging MainChannel:true];
+        [BXCLogging DebugChannel:true];
     }
     
     // If push is enabled and we already registered, attempt to refresh the token:
-	if ([self isPushEnabled]) {
+    if ([self isPushEnabled]) {
         [self registerDevice];
-	}
-	
+    }
+    
     // TODO: Check API URL to return error in case it is invalid
     // => Use precondition so that we give developer immediate feedback during development
     // Check that we have clientKey and secret => if not return NO and error.
     self.alreadyRegistering = NO;
-    
+    ECLog(DebugChannel,@"BOXCAR - setted up with url %@",self.apiURL);
+}
+
+/* Start services: Logging, Register Device, and set Mode */
+- (void)startWithOptions:(NSDictionary *)options andMode:(NSString *)mode
+         completionBlock:(BXCStartCompletionBlock)completionBlock {
+    [[Boxcar sharedInstance] startWithOptions:options];
+    [[Boxcar sharedInstance] setMode:mode];
+    completionBlock(nil);
+}
+
+/* Start services: Logging, Register Device & Defines UNUserNotificationCenterDelegate */
+- (BOOL)startWithOptions:(NSDictionary *)options
+                delegate:(id <UNUserNotificationCenterDelegate>)delegate API_AVAILABLE(ios(10.0))
+{
+    self.NCDelegate = delegate;
+    [[Boxcar sharedInstance] startWithOptions:options];
     return YES;
 }
 
 /* Will return a dictionary filled with the Plist file content */
 - (NSDictionary *)readOptionsFromPlist {
     NSString *path = [[NSBundle mainBundle] pathForResource: @"BoxcarConfig" ofType: @"plist"];
-
+    
     return [[NSDictionary alloc] initWithContentsOfFile:path];
 }
 
 /* Will return the Remote Notification Options in the completion block */
 - (void)extractRemoteNotificationFromLaunchOptions:(NSDictionary *)launchOptions completionBlock:(BXCExtractNotificationCompletionBlock)completionBlock {
-	if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
-		completionBlock(launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]);
-	} else {
-		completionBlock(nil);
-	}
+    if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
+        completionBlock(launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]);
+    } else {
+        completionBlock(nil);
+    }
 }
 
 /* Will return the Remote Notification Options */
@@ -144,19 +148,19 @@
     if (self.settings.deviceToken.length > 0) {
         [self registerOnServerWithToken:self.settings.deviceToken];
     } else {
-        ECLog(MainChannel, @"Did not send parameters: No device token");
+        ECLog(DebugChannel, @"BOXCAR - Did not send parameters: No device token");
     }
 }
 
 /* Alias, Udid and mode properties are actually wrappers to settings.
-   However, changing them will trigger proper server updating.
-TODO:
+ However, changing them will trigger proper server updating.
+ TODO:
  Maybe this should be change to a single KVO ?
  */
 - (void)setAlias:(NSString *)alias {
     NSString *previousAlias = self.alias;
-
-	[[self settings] setAlias:alias];
+    
+    [[self settings] setAlias:alias];
     
     if (![alias isEqualToString:previousAlias]) {
         [[self settings] setNeedUpdate:YES];
@@ -173,8 +177,8 @@ TODO:
 - (void)setTags:(NSArray *)tags {
     /* TODO: Check this is an array of strings */
     NSArray *previousTags = self.tags;
-
-	[[self settings] setTags:tags];
+    
+    [[self settings] setTags:tags];
     
     if (![tags isEqualToArray:previousTags]) {
         [[self settings] setNeedUpdate:YES];
@@ -190,7 +194,7 @@ TODO:
 /* Set categories */
 - (void)setCategories:(NSSet *)categories {
     _categories = categories;
-	
+    
     [self updateUserNotificationSettings];
 }
 
@@ -200,13 +204,13 @@ TODO:
         if ([NSClassFromString(@"ASIdentifierManager") class]){
             [self setDeviceIdentifier:[[[NSClassFromString(@"ASIdentifierManager") sharedManager] advertisingIdentifier] UUIDString]];
         } else {
-            ECLog(MainChannel, @"Please link your application against Apple AdSupport framework to use AdvertisingIdentifier");
+            ECLog(DebugChannel, @"BOXCAR - Please link your application against Apple AdSupport framework to use AdvertisingIdentifier");
         }
     } else {
-        ECLog(DebugChannel, @"unset deviceIdentifier");
+        ECLog(DebugChannel,@"BOXCAR - unset deviceIdentifier");
         [self setDeviceIdentifier:nil];
     }
-	
+    
     [[self settings] setNeedUpdate:YES];
     [self saveDataToDisk];
 }
@@ -216,20 +220,20 @@ TODO:
     if (VendorFlag) {
         [self setDeviceIdentifier:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
     } else {
-        ECLog(DebugChannel, @"unset deviceIdentifier");
+        ECLog(DebugChannel,@"BOXCAR - unset deviceIdentifier");
         [self setDeviceIdentifier:nil];
     }
-	
+    
     [[self settings] setNeedUpdate:YES];
     [self saveDataToDisk];
 }
 
 /* Identifier can be any type of generated device ID.
-   You can for example use identifierForVendor or advertisingIdentifier depending on your requirements
+ You can for example use identifierForVendor or advertisingIdentifier depending on your requirements
  */
 - (void)setDeviceIdentifier:(NSString *)identifier {
     NSString *previousIdentifier = self.deviceIdentifier;
-	
+    
     [[self settings] setUdid:identifier];
     
     if (![identifier isEqualToString:previousIdentifier]) {
@@ -255,14 +259,14 @@ TODO:
  */
 - (void)setMode:(NSString *)mode {
     if (!([mode isEqualToString:@"development"] || [mode isEqualToString:@"production"])) {
-        ECLog(MainChannel, @"Cannot set mode to invalid value: %@", mode);
+        ECLog(DebugChannel, @"BOXCAR - Cannot set mode to invalid value: %@", mode);
         return;
     }
     
     // DLog(@"My Mode is %@", self.settings.mode);
     NSString *previousMode = self.settings.mode;
     [[self settings] setMode:mode];
-
+    
     if (![mode isEqualToString:previousMode]) {
         [[self settings] setNeedUpdate:YES];
         [self saveDataToDisk];
@@ -278,34 +282,35 @@ TODO:
 
 /* Will do the actual registration for notification */
 - (void)registerDevice {
-    ECLog(DebugChannel, @"Registering for user notifications");
+    ECLog(DebugChannel,@"BOXCAR - Registering for user notifications");
     UIApplication *application = [UIApplication sharedApplication];
-	
+    
     // Support for iOS 10
-  if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0")){
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-    if (self.NCDelegate != nil) {
-      center.delegate = self.NCDelegate;
-    }
-    [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
-      if( !error ){
-        [center setNotificationCategories:self.categories];
-        dispatch_async(dispatch_get_main_queue(), ^{
-          [application registerForRemoteNotifications];
-        });
-      }
-    }];
-  } else {
-    // Support for iOS 9
-    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationType)(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:self.categories];
-        [application registerForRemoteNotifications];
-        [application registerUserNotificationSettings:settings];
+    if (@available(iOS 10.0, *)) {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        if (self.NCDelegate != nil) {
+            center.delegate = self.NCDelegate;
+        }
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
+            if( !error ){
+                [center setNotificationCategories:self.categories];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [application registerForRemoteNotifications];
+                });
+            }
+        }];
+        
     } else {
-      // Support for versions prior to iOS 9
-        [application registerForRemoteNotificationTypes:(UIRemoteNotificationType)(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)];
+        
+        // Support for iOS 9
+        if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+            UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationType)(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:self.categories];
+            [application registerForRemoteNotifications];
+            [application registerUserNotificationSettings:settings];
+        } else {
+            ECLog(DebugChannel, @"BOXCAR - registerUserNotificationSettings method not found ");
+        }
     }
-  }
 }
 
 /* Only update the settings if we have a token */
@@ -322,16 +327,16 @@ TODO:
 
 /* Will parse and set the token on server */
 - (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData* )deviceToken {
-    NSString *stringToken = [Boxcar stringFromDeviceToken:deviceToken];
-
-    ECLog(MainChannel, @"Received Token: %@", stringToken);
-
+    NSString *stringToken = [BXCUtilities formatedBytesFromDatas:deviceToken];
+    
+    ECLog(DebugChannel, @"BOXCAR - Received Token: %@", stringToken);
+    
     NSString *previousDeviceToken = self.settings.deviceToken;
     self.settings.deviceToken = stringToken;
     
     [self.settings updatePushState];
-	
-	if (![stringToken isEqualToString:previousDeviceToken] || self.settings.needUpdate) {
+    
+    if (![stringToken isEqualToString:previousDeviceToken] || self.settings.needUpdate) {
         [self saveDataToDisk];
         [self registerOnServerWithToken:stringToken];
     }
@@ -339,9 +344,9 @@ TODO:
 
 /* Handle Push Entitlement error */
 - (void)didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    ECLog(MainChannel, @"Failed device register: %@", error.userInfo);
-	
-	if (error.code == 3000) {
+    ECLog(DebugChannel, @"BOXCAR - Failed device register: %@", error.userInfo);
+    
+    if (error.code == 3000) {
         NSLog(@"Boxcar: Push Entitlement error. Usually, generating your provisioning profile again will solve the problem.");
     }
     
@@ -356,20 +361,7 @@ TODO:
 
 /* Will return wether push is enable or not */
 - (BOOL)isPushEnabled {
-    UIApplication *application = [UIApplication sharedApplication];
-	BOOL result = YES;
-	
-    if ([application respondsToSelector:@selector(currentUserNotificationSettings)]) {
-        // iOS 8
-        UIUserNotificationSettings *currentSettings = [application currentUserNotificationSettings];
-        if (UIUserNotificationTypeNone == currentSettings.types)
-            result = NO;
-    } else {
-        UIRemoteNotificationType types = [application enabledRemoteNotificationTypes];
-        if (types == UIRemoteNotificationTypeNone)
-            result = NO;
-    }
-	return result;
+    return (UIUserNotificationTypeNone !=  [[UIApplication.sharedApplication currentUserNotificationSettings] types]);
 }
 
 /* Get options for notification in background */
@@ -380,7 +372,7 @@ TODO:
 /* Get options for notification */
 - (void)trackNotification:(NSDictionary *)remoteNotif forApplication:(UIApplication *)app {
     NSString *appState = @"active";
-	
+    
     if ([app applicationState] != UIApplicationStateActive) {
         appState = @"background";
     }
@@ -391,7 +383,7 @@ TODO:
 
 /* This method removes the notifications and keep the badge */
 - (void)cleanNotifications {
-	if ([self isUserBadgeAllowed]) {
+    if ([self isUserBadgeAllowed]) {
         [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
         [[UIApplication sharedApplication] setApplicationIconBadgeNumber:[UIApplication sharedApplication].applicationIconBadgeNumber];
@@ -403,7 +395,7 @@ TODO:
 /* This method removes the notifications and set badge to 0 (not displayed) */
 - (void)cleanNotificationsAndBadge {
     [self resetServerBadge];
-	
+    
     if ([self isUserBadgeAllowed]) {
         [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     }
@@ -413,7 +405,7 @@ TODO:
 /* This method resets badge */
 - (void)cleanBadge {
     [self resetServerBadge];
-	
+    
     if ([self isUserBadgeAllowed]) {
         [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     }
@@ -442,14 +434,14 @@ TODO:
     
     NSString *deviceToken = self.settings.deviceToken;
     if (!deviceToken || [deviceToken length] == 0) {
-        ECLog(DebugChannel, @"Skipping badge reset: no device token");
+        ECLog(DebugChannel,@"BOXCAR - Skipping badge reset: no device token");
         return;
     }
- 
+    
     NSString *path = [NSString stringWithFormat:@"/api/reset_badge/%@", deviceToken];
     NSURL *url = [BXCSignature buildSignedURLWithKey:self.clientKey andSecret:self.clientSecret
                                               forUrl:self.apiURL path:path method:@"GET" payload:@""];
-
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"GET"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
@@ -458,19 +450,19 @@ TODO:
     
     // TODO: Refactor HTTP result error logging:
     // DLog(@"Sending request on path: %@", path);
-    ECLog(DebugChannel, @"Request: ResetBadge");
+    ECLog(DebugChannel,@"BOXCAR - Request: ResetBadge");
     BXCJSONRequestOperation *operation = [BXCJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *req, NSHTTPURLResponse *response, id JSON) {
         // Check for JSON error
         NSString *errorLabel = [JSON valueForKeyPath:@"error"];
         if (errorLabel) {
-            ECLog(MainChannel, @"Request Failed with Error: %@", errorLabel);
+            ECLog(DebugChannel, @"BOXCAR - Request Failed with Error: %@", errorLabel);
         } else {
             //     DLog(@"Success");
         }
     } failure:^(NSURLRequest *req, NSHTTPURLResponse *response, NSError *error, id JSON) {
         // Error 404 can be safely ignored. It means we tried reset badge for a deleted device
         if ([response statusCode] != 404) {
-            ECLog(MainChannel, @"Request Failed with Error: %@, %@", error, error.userInfo);
+            ECLog(DebugChannel, @"BOXCAR - Request Failed with Error: %@, %@", error, error.userInfo);
         }
     }];
     [operation setShouldExecuteAsBackgroundTaskWithExpirationHandler:nil];
@@ -508,17 +500,17 @@ TODO:
     if (!deviceToken || [deviceToken length] == 0) {
         NSString *message = @"Cannot registerOnServerWithToken: missing device token";
         [[NSNotificationCenter defaultCenter] postNotificationName:kBXC_DID_FAIL_TO_REGISTER_NOTIFICATION object:self userInfo:@{@"code":@500, @"message":message}];
-        ECLog(MainChannel, message);
+        ECLog(DebugChannel, message);
         return;
     }
-
+    
     self.alreadyRegistering = YES;
     
     NSString *pushState = @"true";
     if (!self.settings.pushState) pushState = @"false";
     
     NSString *deviceName = [[UIDevice currentDevice] name];
-    ECLog(DebugChannel, @"Device Name = %@", deviceName);
+    ECLog(DebugChannel,@"BOXCAR - Device Name = %@", deviceName);
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             NULLIFNIL(self.settings.alias), @"alias",
                             NULLIFNIL([self mode]), @"mode",
@@ -531,39 +523,40 @@ TODO:
                             pushState, @"push",
                             nil];
     NSString *payload = [BXCJSON getRegisterPayloadWith:params];
-    ECLog(DebugChannel, @"Sending device register payload: %@", payload);
-
+    ECLog(DebugChannel,@"BOXCAR - Sending device register payload: %@", payload);
+    
     NSString *path = [NSString stringWithFormat:@"/api/device_tokens/%@", deviceToken];
+    
     NSURL *url = [BXCSignature buildSignedURLWithKey:self.clientKey andSecret:self.clientSecret
                                               forUrl:self.apiURL path:path method:@"PUT" payload:payload];
-
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"PUT"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:[payload dataUsingEncoding:NSUTF8StringEncoding]];
     [request setTimeoutInterval:30];
-
+    
     self.settings.needUpdate = YES; // This is to make sure we will recover in case the request never returns
     [self saveDataToDisk];
     Boxcar * __weak weakSelf = self;
-    ECLog(DebugChannel, @"Request: registerWithToken");
+    ECLog(DebugChannel,@"BOXCAR - Request : %@ registerWithToken",url);
     BXCJSONRequestOperation *operation = [BXCJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *req, NSHTTPURLResponse *response, id JSON) {
         weakSelf.alreadyRegistering = NO;
-
+        
         // Check for JSON error
         NSString *errorLabel = [JSON valueForKeyPath:@"error"];
         if (errorLabel) {
             // Server returned an error, we will need to retry
             weakSelf.settings.needUpdate = YES;
             [weakSelf saveDataToDisk];
-            NSString *message = [NSString stringWithFormat:@"Request Failed with Error: %@", errorLabel];
+            NSString *message = [NSString stringWithFormat:@"BOXCAR - Request Failed with Error: %@", errorLabel];
             [[NSNotificationCenter defaultCenter] postNotificationName:kBXC_DID_FAIL_TO_REGISTER_NOTIFICATION object:self userInfo:@{@"code":@501, @"message":message}];
-            ECLog(MainChannel, message);
+            ECLog(DebugChannel, message);
         } else {
             weakSelf.settings.needUpdate = NO;
             weakSelf.settings.lastServerUpdate = [NSDate date];
             [weakSelf saveDataToDisk];
-            NSString *message = @"Register request success";
+            NSString *message = @"BOXCAR - Register request success";
             [[NSNotificationCenter defaultCenter] postNotificationName:kBXC_DID_REGISTER_NOTIFICATION object:self userInfo:@{@"code":@200, @"message":message}];
             ECLog(DebugChannel, message);
         }
@@ -572,9 +565,9 @@ TODO:
         weakSelf.settings.needUpdate = YES;
         [weakSelf saveDataToDisk];
         // TODO Schedule retry ?
-        NSString *message = [NSString stringWithFormat: @"Register request Failed with Error: %@, %@", error, error.userInfo];
+        NSString *message = [NSString stringWithFormat: @"BOXCAR - Register request failed with error: %@, %@", error, error.userInfo];
         [[NSNotificationCenter defaultCenter] postNotificationName:kBXC_DID_FAIL_TO_REGISTER_NOTIFICATION object:self userInfo:@{@"code":@502, @"message":message}];
-        ECLog(MainChannel, message);
+        ECLog(DebugChannel, message);
     }];
     [operation setShouldExecuteAsBackgroundTaskWithExpirationHandler:nil];
     [operation start];
@@ -595,24 +588,24 @@ TODO:
             NSString *path = [NSString stringWithFormat:@"/api/receive/%@", self.settings.deviceToken];
             NSURL *url = [BXCSignature buildSignedURLWithKey:self.clientKey andSecret:self.clientSecret forUrl:self.apiURL
                                                         path:path method:@"POST" payload:payload];
-
+            
             NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
             [request setHTTPMethod:@"POST"];
             [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             [request setHTTPBody:[payload dataUsingEncoding:NSUTF8StringEncoding]];
             [request setTimeoutInterval:30];
-    
-            ECLog(DebugChannel, @"Request: trackNotification");
+            
+            ECLog(DebugChannel,@"BOXCAR - Request: trackNotification");
             BXCJSONRequestOperation *operation = [BXCJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *req, NSHTTPURLResponse *response, id JSON) {
                 // Check for JSON error
                 NSString *errorLabel = [JSON valueForKeyPath:@"error"];
                 if (errorLabel) {
-                    ECLog(MainChannel, @"Request Failed with Error: %@", errorLabel);
+                    ECLog(DebugChannel, @"BOXCAR - Request Failed with Error: %@", errorLabel);
                 } else {
                     //  DLog(@"Success");
                 }
             } failure:^(NSURLRequest *req, NSHTTPURLResponse *response, NSError *error, id JSON) {
-                ECLog(MainChannel, @"Request Failed with Error: %@, %@", error, error.userInfo);
+                ECLog(DebugChannel, @"BOXCAR - Request Failed with Error: %@, %@", error, error.userInfo);
             }];
             [operation setShouldExecuteAsBackgroundTaskWithExpirationHandler:nil];
             [operation start];
@@ -636,19 +629,19 @@ TODO:
     if (self.settings.deviceToken != nil) {
         NSString *path = [NSString stringWithFormat:@"/api/device_tokens/%@", self.settings.deviceToken];
         NSURL *url = [BXCSignature buildSignedURLWithKey:self.clientKey andSecret:self.clientSecret forUrl:self.apiURL path:path method:@"DELETE" payload:@""];
-
+        
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         [request setHTTPMethod:@"DELETE"];
         [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         [request setTimeoutInterval:30];
-    
+        
         Boxcar * __weak weakSelf = self;
-        ECLog(DebugChannel, @"Request: unregisterDevice");
+        ECLog(DebugChannel,@"BOXCAR - Request: unregisterDevice");
         BXCJSONRequestOperation *operation = [BXCJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *req, NSHTTPURLResponse *response, id JSON) {
             // Check for JSON error
             NSString *errorLabel = [JSON valueForKeyPath:@"error"];
             if (errorLabel) {
-                ECLog(MainChannel, @"Request Failed with Error: %@", errorLabel);
+                ECLog(DebugChannel, @"BOXCAR - Request Failed with Error: %@", errorLabel);
             } else {
                 //  DLog(@"Success");
                 weakSelf.settings.deviceToken = nil;
@@ -663,7 +656,7 @@ TODO:
                 [weakSelf saveDataToDisk];
             }
         } failure:^(NSURLRequest *req, NSHTTPURLResponse *response, NSError *error, id JSON) {
-            ECLog(MainChannel, @"Request Failed with Error: %@, %@", error, error.userInfo);
+            ECLog(DebugChannel, @"BOXCAR - Request Failed with Error: %@, %@", error, error.userInfo);
         }];
         [operation setShouldExecuteAsBackgroundTaskWithExpirationHandler:nil];
         [operation start];
@@ -677,27 +670,27 @@ TODO:
     NSString *path = @"/api/tags/";
     NSURL *url = [BXCSignature buildSignedURLWithKey:self.clientKey andSecret:self.clientSecret forUrl:self.apiURL
                                                 path:path method:@"GET" payload:@""];
-        
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"GET"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setTimeoutInterval:30];
     
-    ECLog(DebugChannel, @"Request: RetrieveProjectTags");
+    ECLog(DebugChannel,@"BOXCAR - Request: RetrieveProjectTags");
     BXCJSONRequestOperation *operation = [BXCJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *req, NSHTTPURLResponse *response, id JSON) {
-            // Check for JSON error
-            NSString *errorLabel = [JSON valueForKeyPath:@"error"];
-            if (errorLabel) {
-                ECLog(MainChannel, @"Request Failed with Error: %@", errorLabel);
-            } else {
-                // DLog(@"Success");
-                NSArray *tags = [JSON valueForKeyPath:@"ok"];
-                resultBlock(tags);
-            }
-        } failure:^(NSURLRequest *req, NSHTTPURLResponse *response, NSError *error, id JSON) {
-            resultBlock(nil);
-            ECLog(MainChannel, @"Request Failed with Error: %@, %@", error, error.userInfo);
-        }];
+        // Check for JSON error
+        NSString *errorLabel = [JSON valueForKeyPath:@"error"];
+        if (errorLabel) {
+            ECLog(DebugChannel, @"BOXCAR - Request Failed with Error: %@", errorLabel);
+        } else {
+            // DLog(@"Success");
+            NSArray *tags = [JSON valueForKeyPath:@"ok"];
+            resultBlock(tags);
+        }
+    } failure:^(NSURLRequest *req, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        resultBlock(nil);
+        ECLog(DebugChannel, @"BOXCAR - Request Failed with Error: %@, %@", error, error.userInfo);
+    }];
     [operation setShouldExecuteAsBackgroundTaskWithExpirationHandler:nil];
     [operation start];
     request = nil;
@@ -783,27 +776,5 @@ TODO:
         [self.delegate didReceiveError:error];
     }
 }
-
-#pragma mark - Helpers
-
-/* For enabling debug channel */
-- (void)dbm {
-    [BXCLogging DebugChannel:YES];
-}
-
-
-+ (NSString *)stringFromDeviceToken:(NSData *)deviceToken {
-    NSUInteger length = deviceToken.length;
-    if (length == 0) {
-        return nil;
-    }
-    const unsigned char *buffer = deviceToken.bytes;
-    NSMutableString *hexString  = [NSMutableString stringWithCapacity:(length * 2)];
-    for (int i = 0; i < length; ++i) {
-        [hexString appendFormat:@"%02x", buffer[i]];
-    }
-    return [hexString copy];
-}
-
 
 @end

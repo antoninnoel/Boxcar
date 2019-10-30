@@ -53,7 +53,7 @@ NSError *currentError;
     currentError = nil;
 	
     if (self.streamId == nil) {
-        ECLog(MainChannel, @"Missing Event Stream StreamId");
+        ECLog(DebugChannel, @"BOXCAR - Missing Event Stream StreamId");
         return;
     }
     // DLog(@"Connecting with StreamId: %@", self.streamId);
@@ -70,7 +70,7 @@ NSError *currentError;
     NSURL *serverURL = [[Boxcar sharedInstance] apiURL];
     NSURL *url = [BXCSignature buildSignedURLWithKey:[[Boxcar sharedInstance] clientKey] andSecret:[[Boxcar sharedInstance] clientSecret] forUrl:serverURL path:path method:@"GET" payload:@""];
 
-    ECLog(DebugChannel, @"URL is %@", url.absoluteURL);
+    ECLog(DebugChannel,@"BOXCAR - URL is %@", url.absoluteURL);
     request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod:@"GET"];
     [request setValue:@"text/event-stream" forHTTPHeaderField:@"Accept"];
@@ -113,7 +113,7 @@ NSError *currentError;
 
     // This is purely keep-alive content
     if ([eventString isEqualToString:@":\n"]) {
-        ECLog(MainChannel, @"Still connected");
+        ECLog(DebugChannel, @"BOXCAR - Still connected");
         return;
     }
 
@@ -126,7 +126,7 @@ NSError *currentError;
 
 /* Stream didFailWithError */
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    ECLog(MainChannel, @"Stream request error: %@, %@", error, error.userInfo);
+    ECLog(DebugChannel, @"BOXCAR - Stream request error: %@, %@", error, error.userInfo);
 
     // We lost network / are not connected to internet.
     // Do not attempt to reconnect immediately.
@@ -134,9 +134,9 @@ NSError *currentError;
     if (code == kCFURLErrorNetworkConnectionLost || code == kCFURLErrorNotConnectedToInternet) {
         // Wait for a while and reconnects later.
         [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(connect) userInfo:nil repeats:NO];
-        ECLog(MainChannel, @"Connection lost. Do not try to reconnect now");
+        ECLog(DebugChannel, @"BOXCAR - Connection lost. Do not try to reconnect now");
     } else {
-        ECLog(MainChannel, @"Other error: %@", error);
+        ECLog(DebugChannel, @"BOXCAR - Other error: %@", error);
         // Cancel background task and reconnect
         [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskID];
         self.backgroundTaskID = UIBackgroundTaskInvalid;
@@ -146,7 +146,7 @@ NSError *currentError;
 
 /* connectionDidFinishLoading */
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-	ECLog(DebugChannel, @"connectionDidFinishLoading");
+	ECLog(DebugChannel,@"BOXCAR - connectionDidFinishLoading");
 	[[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskID];
 	self.backgroundTaskID = UIBackgroundTaskInvalid;
 	
@@ -162,7 +162,7 @@ NSError *currentError;
     options = options | NSRegularExpressionDotMatchesLineSeparators;
     NSRegularExpression *regexp = [NSRegularExpression regularExpressionWithPattern:regexEventId
                                                                             options:(NSRegularExpressionOptions) options error:&error];
-    if (regexp == nil) ECLog(DebugChannel, @"Error making regex: %@", error );
+    if (regexp == nil) ECLog(DebugChannel,@"BOXCAR - Error making regex: %@", error );
     NSTextCheckingResult *match = [regexp firstMatchInString:eventString options:(NSMatchingOptions) 0
                                                        range:NSMakeRange(0, [eventString length])];
     NSRange range = [match rangeAtIndex:1];
@@ -175,7 +175,7 @@ NSError *currentError;
     NSString *regexEventData = @"^data: (.*?)\n\n";
     regexp = [NSRegularExpression regularExpressionWithPattern:regexEventData
                                                        options:(NSRegularExpressionOptions) 0 error:&error];
-    if (regexp == nil) ECLog(DebugChannel, @"Error making regex 2: %@", error );
+    if (regexp == nil) ECLog(DebugChannel,@"BOXCAR - Error making regex 2: %@", error );
     match = [regexp firstMatchInString:dataString options:(NSMatchingOptions) 0
                                  range:NSMakeRange(0, [dataString length])];
     range = [match rangeAtIndex:1];

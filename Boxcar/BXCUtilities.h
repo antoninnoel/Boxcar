@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BXCUtilities : NSObject
 
++ (NSString *)formatedBytesFromDatas:(NSData *)datas;
+
 @end
 
 NS_ASSUME_NONNULL_END

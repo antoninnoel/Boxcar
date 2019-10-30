@@ -119,10 +119,10 @@
         NSDateComponents *components = [calendar components:NSHourCalendarUnit fromDate:self.lastServerUpdate toDate:[NSDate date] options:NSCalendarMatchStrictly];
     
         if ([components hour] >= 24) {
-            ECLog(DebugChannel, @"Time based update trigger (%ld)", (long)[components hour]);
+            ECLog(DebugChannel,@"BOXCAR - Time based update trigger (%ld)", (long)[components hour]);
             return YES;
         } else {
-            ECLog(DebugChannel, @"No forced server update (%ld)", (long)[components hour]);
+            ECLog(DebugChannel,@"BOXCAR - No forced server update (%ld)", (long)[components hour]);
             return _needUpdate;
         }
     } else {

@@ -26,16 +26,12 @@
 
 #import "ECLogManager.h"
 
-ECDeclareLogChannel(MainChannel);
 ECDeclareLogChannel(DebugChannel);
 
 @interface BXCLogging : NSObject
 
 /* initialise log manager (with default handler for NSLog) */
 + (void)startup;
-
-/* Enable or not MainChanel */
-+ (void)MainChannel:(BOOL)enabled;
 
 /* Enable or not DebugChanel */
 + (void)DebugChannel:(BOOL)enabled;

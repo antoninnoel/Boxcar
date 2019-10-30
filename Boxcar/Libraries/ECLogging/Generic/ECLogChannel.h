@@ -47,7 +47,7 @@
 
 	 ECLog(MyLogChannel, @"this is a test %@ %d", @"blah", 123);
 
-	 ECDebug(MyDebugChannel, @"doodah");
+	 ECDebug(MyDebugChannel,@"BOXCAR - doodah");
 
  As mentioned above, ECLog statements will always be compiled, so you need to use them with channels defined by ECDefineLogChannel.
 

@@ -41,11 +41,11 @@
     if ([settingsData isKindOfClass:[BXCSettings class]]) {
 		settings = settingsData;
 	} else {
-		ECLog(DebugChannel, @"Settings data class = %@", NSStringFromClass([settingsData class]));
+		ECLog(DebugChannel,@"BOXCAR - Settings data class = %@", NSStringFromClass([settingsData class]));
 	}
     
     if (settings == nil) {
-        ECLog(DebugChannel, @"Settings == nil");
+        ECLog(DebugChannel,@"BOXCAR - Settings == nil");
         settings = [[BXCSettings alloc] init];
     }
     return settings;

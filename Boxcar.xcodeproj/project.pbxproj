@@ -8,12 +8,206 @@
 
 /* Begin PBXBuildFile section */
 		691E340C2369C9890077E7DD /* Boxcar.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E340A2369C9890077E7DD /* Boxcar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E34392369C9AD0077E7DD /* BXCMobileProvision.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34122369C9AD0077E7DD /* BXCMobileProvision.m */; };
+		691E343A2369C9AD0077E7DD /* BXCConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34132369C9AD0077E7DD /* BXCConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E343B2369C9AD0077E7DD /* BXCEventStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34142369C9AD0077E7DD /* BXCEventStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E343C2369C9AD0077E7DD /* BXCSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34152369C9AD0077E7DD /* BXCSignature.m */; };
+		691E343D2369C9AD0077E7DD /* BXCJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34162369C9AD0077E7DD /* BXCJSON.m */; };
+		691E343E2369C9AD0077E7DD /* BXCMobileProvision.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34172369C9AD0077E7DD /* BXCMobileProvision.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E34542369C9AD0077E7DD /* BXCSignature.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E342E2369C9AD0077E7DD /* BXCSignature.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E34552369C9AD0077E7DD /* BXCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E342F2369C9AD0077E7DD /* BXCSettings.m */; };
+		691E34562369C9AD0077E7DD /* BXCLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34302369C9AD0077E7DD /* BXCLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E34572369C9AD0077E7DD /* BXCPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34312369C9AD0077E7DD /* BXCPersistence.m */; };
+		691E34582369C9AD0077E7DD /* BXCSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34322369C9AD0077E7DD /* BXCSettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E34592369C9AD0077E7DD /* BXCPersistence.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34332369C9AD0077E7DD /* BXCPersistence.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E345A2369C9AD0077E7DD /* BXCEventStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34342369C9AD0077E7DD /* BXCEventStream.m */; };
+		691E345B2369C9AD0077E7DD /* BXCConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34352369C9AD0077E7DD /* BXCConstants.m */; };
+		691E345C2369C9AD0077E7DD /* BXCLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34362369C9AD0077E7DD /* BXCLogging.m */; };
+		691E345D2369C9AD0077E7DD /* BXCJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34372369C9AD0077E7DD /* BXCJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E345E2369C9AD0077E7DD /* BXCMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34382369C9AD0077E7DD /* BXCMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E34602369C9B50077E7DD /* Boxcar.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E345F2369C9B50077E7DD /* Boxcar.m */; };
+		691E34BC2369C9C10077E7DD /* ECLoggingDebug.pch in Headers */ = {isa = PBXBuildFile; fileRef = 691E34642369C9C10077E7DD /* ECLoggingDebug.pch */; };
+		691E34BD2369C9C10077E7DD /* ECLoggingShared.pch in Headers */ = {isa = PBXBuildFile; fileRef = 691E34652369C9C10077E7DD /* ECLoggingShared.pch */; };
+		691E34BE2369C9C10077E7DD /* ECLoggingRelease.pch in Headers */ = {isa = PBXBuildFile; fileRef = 691E34662369C9C10077E7DD /* ECLoggingRelease.pch */; };
+		691E34BF2369C9C10077E7DD /* ECErrorReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34682369C9C10077E7DD /* ECErrorReporter.h */; };
+		691E34C02369C9C10077E7DD /* ECLogChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34692369C9C10077E7DD /* ECLogChannel.h */; };
+		691E34C12369C9C10077E7DD /* ECErrorAndMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E346A2369C9C10077E7DD /* ECErrorAndMessage.h */; };
+		691E34C22369C9C10077E7DD /* ECLogManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E346B2369C9C10077E7DD /* ECLogManager.h */; };
+		691E34C32369C9C10077E7DD /* ECLoggingGeneric.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E346C2369C9C10077E7DD /* ECLoggingGeneric.h */; };
+		691E34C42369C9C10077E7DD /* ECLogHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E346D2369C9C10077E7DD /* ECLogHandler.m */; };
+		691E34C52369C9C10077E7DD /* ECLogContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E346E2369C9C10077E7DD /* ECLogContext.h */; };
+		691E34C62369C9C10077E7DD /* ECAssertion.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E346F2369C9C10077E7DD /* ECAssertion.h */; };
+		691E34C72369C9C10077E7DD /* ECASLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34702369C9C10077E7DD /* ECASLClient.m */; };
+		691E34C82369C9C10077E7DD /* ECMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34712369C9C10077E7DD /* ECMacros.h */; };
+		691E34C92369C9C10077E7DD /* ECLogChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34722369C9C10077E7DD /* ECLogChannel.m */; };
+		691E34CA2369C9C10077E7DD /* ECErrorReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34732369C9C10077E7DD /* ECErrorReporter.m */; };
+		691E34CB2369C9C10077E7DD /* ECLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34742369C9C10077E7DD /* ECLogging.m */; };
+		691E34CC2369C9C10077E7DD /* ECLogHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34752369C9C10077E7DD /* ECLogHandler.h */; };
+		691E34CD2369C9C10077E7DD /* ECLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34762369C9C10077E7DD /* ECLogManager.m */; };
+		691E34CE2369C9C10077E7DD /* ECErrorAndMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34772369C9C10077E7DD /* ECErrorAndMessage.m */; };
+		691E34CF2369C9C10077E7DD /* ECLogHandlerStdout.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34792369C9C10077E7DD /* ECLogHandlerStdout.h */; };
+		691E34D02369C9C10077E7DD /* ECLogHandlerStderr.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E347A2369C9C10077E7DD /* ECLogHandlerStderr.m */; };
+		691E34D12369C9C10077E7DD /* ECLogHandlerFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E347B2369C9C10077E7DD /* ECLogHandlerFile.h */; };
+		691E34D22369C9C10077E7DD /* ECLogHandlerNSLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E347C2369C9C10077E7DD /* ECLogHandlerNSLog.h */; };
+		691E34D32369C9C10077E7DD /* ECLogHandlerASL.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E347D2369C9C10077E7DD /* ECLogHandlerASL.h */; };
+		691E34D42369C9C10077E7DD /* ECLogHandlerStdout.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E347E2369C9C10077E7DD /* ECLogHandlerStdout.m */; };
+		691E34D52369C9C10077E7DD /* ECLogHandlerNSLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E347F2369C9C10077E7DD /* ECLogHandlerNSLog.m */; };
+		691E34D62369C9C10077E7DD /* ECLogHandlerFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34802369C9C10077E7DD /* ECLogHandlerFile.m */; };
+		691E34D72369C9C10077E7DD /* ECLogHandlerStderr.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34812369C9C10077E7DD /* ECLogHandlerStderr.h */; };
+		691E34D82369C9C10077E7DD /* ECLogHandlerASL.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34822369C9C10077E7DD /* ECLogHandlerASL.m */; };
+		691E34D92369C9C10077E7DD /* ECASLClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34832369C9C10077E7DD /* ECASLClient.h */; };
+		691E34DA2369C9C10077E7DD /* ECAssertion.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34842369C9C10077E7DD /* ECAssertion.m */; };
+		691E34DB2369C9C10077E7DD /* ECLoggingMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34852369C9C10077E7DD /* ECLoggingMacros.h */; };
+		691E34DC2369C9C10077E7DD /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 691E34862369C9C10077E7DD /* libOCMock.a */; };
+		691E34DD2369C9C10077E7DD /* BXCJSONRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34882369C9C10077E7DD /* BXCJSONRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E34DE2369C9C10077E7DD /* BXCHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34892369C9C10077E7DD /* BXCHTTPClient.m */; };
+		691E34DF2369C9C10077E7DD /* BXCXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E348A2369C9C10077E7DD /* BXCXMLRequestOperation.m */; };
+		691E34E02369C9C10077E7DD /* BXCImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E348B2369C9C10077E7DD /* BXCImageRequestOperation.m */; };
+		691E34E12369C9C10077E7DD /* BXCNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E348C2369C9C10077E7DD /* BXCNetworkActivityIndicatorManager.m */; };
+		691E34E22369C9C10077E7DD /* UIImageView+BXCNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E348D2369C9C10077E7DD /* UIImageView+BXCNetworking.h */; };
+		691E34E32369C9C10077E7DD /* BXCURLConnectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E348E2369C9C10077E7DD /* BXCURLConnectionOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E34E42369C9C10077E7DD /* BXCPropertyListRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E348F2369C9C10077E7DD /* BXCPropertyListRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E34E52369C9C10077E7DD /* BXCHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34902369C9C10077E7DD /* BXCHTTPRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E34E62369C9C10077E7DD /* BXCImageRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34912369C9C10077E7DD /* BXCImageRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E34E72369C9C10077E7DD /* BXCXMLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34922369C9C10077E7DD /* BXCXMLRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E34E82369C9C10077E7DD /* BXCHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34932369C9C10077E7DD /* BXCHTTPClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E34E92369C9C10077E7DD /* BXCJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34942369C9C10077E7DD /* BXCJSONRequestOperation.m */; };
+		691E34EA2369C9C10077E7DD /* BXCNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34952369C9C10077E7DD /* BXCNetworkActivityIndicatorManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E34EB2369C9C10077E7DD /* BXCPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34962369C9C10077E7DD /* BXCPropertyListRequestOperation.m */; };
+		691E34EC2369C9C10077E7DD /* BXCURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34972369C9C10077E7DD /* BXCURLConnectionOperation.m */; };
+		691E34ED2369C9C10077E7DD /* BXCNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34982369C9C10077E7DD /* BXCNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E34EE2369C9C10077E7DD /* UIImageView+BXCNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E34992369C9C10077E7DD /* UIImageView+BXCNetworking.m */; };
+		691E34EF2369C9C10077E7DD /* BXCHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E349A2369C9C10077E7DD /* BXCHTTPRequestOperation.m */; };
+		691E34FF2369C9C10077E7DD /* OCMockObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34B22369C9C10077E7DD /* OCMockObject.h */; };
+		691E35002369C9C10077E7DD /* OCMMacroState.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34B32369C9C10077E7DD /* OCMMacroState.h */; };
+		691E35012369C9C10077E7DD /* OCMock.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34B42369C9C10077E7DD /* OCMock.h */; };
+		691E35022369C9C10077E7DD /* NSNotificationCenter+OCMAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34B52369C9C10077E7DD /* NSNotificationCenter+OCMAdditions.h */; };
+		691E35032369C9C10077E7DD /* OCMFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34B62369C9C10077E7DD /* OCMFunctions.h */; };
+		691E35042369C9C10077E7DD /* OCMStubRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34B72369C9C10077E7DD /* OCMStubRecorder.h */; };
+		691E35052369C9C10077E7DD /* OCMRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34B82369C9C10077E7DD /* OCMRecorder.h */; };
+		691E35062369C9C10077E7DD /* OCMLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34B92369C9C10077E7DD /* OCMLocation.h */; };
+		691E35072369C9C10077E7DD /* OCMConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34BA2369C9C10077E7DD /* OCMConstraint.h */; };
+		691E35082369C9C10077E7DD /* OCMArg.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E34BB2369C9C10077E7DD /* OCMArg.h */; };
+		691E351F2369CAB70077E7DD /* Compatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E350A2369CAB70077E7DD /* Compatibility.h */; };
+		691E35202369CAB70077E7DD /* OHHTTPStubsResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E350B2369CAB70077E7DD /* OHHTTPStubsResponse.h */; };
+		691E35212369CAB70077E7DD /* OHHTTPStubs.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E350C2369CAB70077E7DD /* OHHTTPStubs.m */; };
+		691E35222369CAB70077E7DD /* OHHTTPStubsResponse+HTTPMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E350E2369CAB70077E7DD /* OHHTTPStubsResponse+HTTPMessage.h */; };
+		691E35232369CAB70077E7DD /* OHHTTPStubsResponse+HTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E350F2369CAB70077E7DD /* OHHTTPStubsResponse+HTTPMessage.m */; };
+		691E35242369CAB70077E7DD /* OHHTTPStubs+Mocktail.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E35112369CAB70077E7DD /* OHHTTPStubs+Mocktail.h */; };
+		691E35252369CAB70077E7DD /* OHHTTPStubs+Mocktail.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E35122369CAB70077E7DD /* OHHTTPStubs+Mocktail.m */; };
+		691E35262369CAB70077E7DD /* OHHTTPStubsResponse+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E35142369CAB70077E7DD /* OHHTTPStubsResponse+JSON.m */; };
+		691E35272369CAB70077E7DD /* OHHTTPStubsResponse+JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E35152369CAB70077E7DD /* OHHTTPStubsResponse+JSON.h */; };
+		691E35292369CAB70077E7DD /* OHPathHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E35192369CAB70077E7DD /* OHPathHelpers.m */; };
+		691E352A2369CAB70077E7DD /* OHPathHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E351A2369CAB70077E7DD /* OHPathHelpers.h */; };
+		691E352B2369CAB70077E7DD /* OHHTTPStubsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E351B2369CAB70077E7DD /* OHHTTPStubsResponse.m */; };
+		691E352C2369CAB70077E7DD /* OHHTTPStubs.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E351C2369CAB70077E7DD /* OHHTTPStubs.h */; };
+		691E352D2369CAB70077E7DD /* OHHTTPStubs+NSURLSessionConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E351E2369CAB70077E7DD /* OHHTTPStubs+NSURLSessionConfiguration.m */; };
+		691E355A2369CB2D0077E7DD /* Boxcar-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 691E35592369CB2D0077E7DD /* Boxcar-Prefix.pch */; };
+		691E35682369DFE70077E7DD /* BXCUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 691E35662369DFE70077E7DD /* BXCUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		691E35692369DFE70077E7DD /* BXCUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 691E35672369DFE70077E7DD /* BXCUtilities.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		691E34072369C9890077E7DD /* Boxcar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Boxcar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		691E340A2369C9890077E7DD /* Boxcar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Boxcar.h; sourceTree = "<group>"; };
 		691E340B2369C9890077E7DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		691E34122369C9AD0077E7DD /* BXCMobileProvision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCMobileProvision.m; sourceTree = "<group>"; };
+		691E34132369C9AD0077E7DD /* BXCConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCConstants.h; sourceTree = "<group>"; };
+		691E34142369C9AD0077E7DD /* BXCEventStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCEventStream.h; sourceTree = "<group>"; };
+		691E34152369C9AD0077E7DD /* BXCSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCSignature.m; sourceTree = "<group>"; };
+		691E34162369C9AD0077E7DD /* BXCJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCJSON.m; sourceTree = "<group>"; };
+		691E34172369C9AD0077E7DD /* BXCMobileProvision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCMobileProvision.h; sourceTree = "<group>"; };
+		691E342E2369C9AD0077E7DD /* BXCSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCSignature.h; sourceTree = "<group>"; };
+		691E342F2369C9AD0077E7DD /* BXCSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCSettings.m; sourceTree = "<group>"; };
+		691E34302369C9AD0077E7DD /* BXCLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCLogging.h; sourceTree = "<group>"; };
+		691E34312369C9AD0077E7DD /* BXCPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCPersistence.m; sourceTree = "<group>"; };
+		691E34322369C9AD0077E7DD /* BXCSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCSettings.h; sourceTree = "<group>"; };
+		691E34332369C9AD0077E7DD /* BXCPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCPersistence.h; sourceTree = "<group>"; };
+		691E34342369C9AD0077E7DD /* BXCEventStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCEventStream.m; sourceTree = "<group>"; };
+		691E34352369C9AD0077E7DD /* BXCConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCConstants.m; sourceTree = "<group>"; };
+		691E34362369C9AD0077E7DD /* BXCLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCLogging.m; sourceTree = "<group>"; };
+		691E34372369C9AD0077E7DD /* BXCJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCJSON.h; sourceTree = "<group>"; };
+		691E34382369C9AD0077E7DD /* BXCMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCMacros.h; sourceTree = "<group>"; };
+		691E345F2369C9B50077E7DD /* Boxcar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Boxcar.m; sourceTree = "<group>"; };
+		691E34642369C9C10077E7DD /* ECLoggingDebug.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoggingDebug.pch; sourceTree = "<group>"; };
+		691E34652369C9C10077E7DD /* ECLoggingShared.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoggingShared.pch; sourceTree = "<group>"; };
+		691E34662369C9C10077E7DD /* ECLoggingRelease.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoggingRelease.pch; sourceTree = "<group>"; };
+		691E34682369C9C10077E7DD /* ECErrorReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECErrorReporter.h; sourceTree = "<group>"; };
+		691E34692369C9C10077E7DD /* ECLogChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLogChannel.h; sourceTree = "<group>"; };
+		691E346A2369C9C10077E7DD /* ECErrorAndMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECErrorAndMessage.h; sourceTree = "<group>"; };
+		691E346B2369C9C10077E7DD /* ECLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLogManager.h; sourceTree = "<group>"; };
+		691E346C2369C9C10077E7DD /* ECLoggingGeneric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoggingGeneric.h; sourceTree = "<group>"; };
+		691E346D2369C9C10077E7DD /* ECLogHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLogHandler.m; sourceTree = "<group>"; };
+		691E346E2369C9C10077E7DD /* ECLogContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLogContext.h; sourceTree = "<group>"; };
+		691E346F2369C9C10077E7DD /* ECAssertion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECAssertion.h; sourceTree = "<group>"; };
+		691E34702369C9C10077E7DD /* ECASLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECASLClient.m; sourceTree = "<group>"; };
+		691E34712369C9C10077E7DD /* ECMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECMacros.h; sourceTree = "<group>"; };
+		691E34722369C9C10077E7DD /* ECLogChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLogChannel.m; sourceTree = "<group>"; };
+		691E34732369C9C10077E7DD /* ECErrorReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECErrorReporter.m; sourceTree = "<group>"; };
+		691E34742369C9C10077E7DD /* ECLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLogging.m; sourceTree = "<group>"; };
+		691E34752369C9C10077E7DD /* ECLogHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLogHandler.h; sourceTree = "<group>"; };
+		691E34762369C9C10077E7DD /* ECLogManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLogManager.m; sourceTree = "<group>"; };
+		691E34772369C9C10077E7DD /* ECErrorAndMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECErrorAndMessage.m; sourceTree = "<group>"; };
+		691E34792369C9C10077E7DD /* ECLogHandlerStdout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLogHandlerStdout.h; sourceTree = "<group>"; };
+		691E347A2369C9C10077E7DD /* ECLogHandlerStderr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLogHandlerStderr.m; sourceTree = "<group>"; };
+		691E347B2369C9C10077E7DD /* ECLogHandlerFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLogHandlerFile.h; sourceTree = "<group>"; };
+		691E347C2369C9C10077E7DD /* ECLogHandlerNSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLogHandlerNSLog.h; sourceTree = "<group>"; };
+		691E347D2369C9C10077E7DD /* ECLogHandlerASL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLogHandlerASL.h; sourceTree = "<group>"; };
+		691E347E2369C9C10077E7DD /* ECLogHandlerStdout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLogHandlerStdout.m; sourceTree = "<group>"; };
+		691E347F2369C9C10077E7DD /* ECLogHandlerNSLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLogHandlerNSLog.m; sourceTree = "<group>"; };
+		691E34802369C9C10077E7DD /* ECLogHandlerFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLogHandlerFile.m; sourceTree = "<group>"; };
+		691E34812369C9C10077E7DD /* ECLogHandlerStderr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLogHandlerStderr.h; sourceTree = "<group>"; };
+		691E34822369C9C10077E7DD /* ECLogHandlerASL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLogHandlerASL.m; sourceTree = "<group>"; };
+		691E34832369C9C10077E7DD /* ECASLClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECASLClient.h; sourceTree = "<group>"; };
+		691E34842369C9C10077E7DD /* ECAssertion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECAssertion.m; sourceTree = "<group>"; };
+		691E34852369C9C10077E7DD /* ECLoggingMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoggingMacros.h; sourceTree = "<group>"; };
+		691E34862369C9C10077E7DD /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOCMock.a; sourceTree = "<group>"; };
+		691E34882369C9C10077E7DD /* BXCJSONRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCJSONRequestOperation.h; sourceTree = "<group>"; };
+		691E34892369C9C10077E7DD /* BXCHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCHTTPClient.m; sourceTree = "<group>"; };
+		691E348A2369C9C10077E7DD /* BXCXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCXMLRequestOperation.m; sourceTree = "<group>"; };
+		691E348B2369C9C10077E7DD /* BXCImageRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCImageRequestOperation.m; sourceTree = "<group>"; };
+		691E348C2369C9C10077E7DD /* BXCNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		691E348D2369C9C10077E7DD /* UIImageView+BXCNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+BXCNetworking.h"; sourceTree = "<group>"; };
+		691E348E2369C9C10077E7DD /* BXCURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCURLConnectionOperation.h; sourceTree = "<group>"; };
+		691E348F2369C9C10077E7DD /* BXCPropertyListRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCPropertyListRequestOperation.h; sourceTree = "<group>"; };
+		691E34902369C9C10077E7DD /* BXCHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCHTTPRequestOperation.h; sourceTree = "<group>"; };
+		691E34912369C9C10077E7DD /* BXCImageRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCImageRequestOperation.h; sourceTree = "<group>"; };
+		691E34922369C9C10077E7DD /* BXCXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCXMLRequestOperation.h; sourceTree = "<group>"; };
+		691E34932369C9C10077E7DD /* BXCHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCHTTPClient.h; sourceTree = "<group>"; };
+		691E34942369C9C10077E7DD /* BXCJSONRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCJSONRequestOperation.m; sourceTree = "<group>"; };
+		691E34952369C9C10077E7DD /* BXCNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		691E34962369C9C10077E7DD /* BXCPropertyListRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCPropertyListRequestOperation.m; sourceTree = "<group>"; };
+		691E34972369C9C10077E7DD /* BXCURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCURLConnectionOperation.m; sourceTree = "<group>"; };
+		691E34982369C9C10077E7DD /* BXCNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCNetworking.h; sourceTree = "<group>"; };
+		691E34992369C9C10077E7DD /* UIImageView+BXCNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+BXCNetworking.m"; sourceTree = "<group>"; };
+		691E349A2369C9C10077E7DD /* BXCHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCHTTPRequestOperation.m; sourceTree = "<group>"; };
+		691E34B22369C9C10077E7DD /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
+		691E34B32369C9C10077E7DD /* OCMMacroState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMMacroState.h; sourceTree = "<group>"; };
+		691E34B42369C9C10077E7DD /* OCMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMock.h; sourceTree = "<group>"; };
+		691E34B52369C9C10077E7DD /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
+		691E34B62369C9C10077E7DD /* OCMFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMFunctions.h; sourceTree = "<group>"; };
+		691E34B72369C9C10077E7DD /* OCMStubRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMStubRecorder.h; sourceTree = "<group>"; };
+		691E34B82369C9C10077E7DD /* OCMRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMRecorder.h; sourceTree = "<group>"; };
+		691E34B92369C9C10077E7DD /* OCMLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMLocation.h; sourceTree = "<group>"; };
+		691E34BA2369C9C10077E7DD /* OCMConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMConstraint.h; sourceTree = "<group>"; };
+		691E34BB2369C9C10077E7DD /* OCMArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMArg.h; sourceTree = "<group>"; };
+		691E350A2369CAB70077E7DD /* Compatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compatibility.h; sourceTree = "<group>"; };
+		691E350B2369CAB70077E7DD /* OHHTTPStubsResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OHHTTPStubsResponse.h; sourceTree = "<group>"; };
+		691E350C2369CAB70077E7DD /* OHHTTPStubs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OHHTTPStubs.m; sourceTree = "<group>"; };
+		691E350E2369CAB70077E7DD /* OHHTTPStubsResponse+HTTPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OHHTTPStubsResponse+HTTPMessage.h"; sourceTree = "<group>"; };
+		691E350F2369CAB70077E7DD /* OHHTTPStubsResponse+HTTPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OHHTTPStubsResponse+HTTPMessage.m"; sourceTree = "<group>"; };
+		691E35112369CAB70077E7DD /* OHHTTPStubs+Mocktail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OHHTTPStubs+Mocktail.h"; sourceTree = "<group>"; };
+		691E35122369CAB70077E7DD /* OHHTTPStubs+Mocktail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OHHTTPStubs+Mocktail.m"; sourceTree = "<group>"; };
+		691E35142369CAB70077E7DD /* OHHTTPStubsResponse+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OHHTTPStubsResponse+JSON.m"; sourceTree = "<group>"; };
+		691E35152369CAB70077E7DD /* OHHTTPStubsResponse+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OHHTTPStubsResponse+JSON.h"; sourceTree = "<group>"; };
+		691E35192369CAB70077E7DD /* OHPathHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OHPathHelpers.m; sourceTree = "<group>"; };
+		691E351A2369CAB70077E7DD /* OHPathHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OHPathHelpers.h; sourceTree = "<group>"; };
+		691E351B2369CAB70077E7DD /* OHHTTPStubsResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OHHTTPStubsResponse.m; sourceTree = "<group>"; };
+		691E351C2369CAB70077E7DD /* OHHTTPStubs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OHHTTPStubs.h; sourceTree = "<group>"; };
+		691E351E2369CAB70077E7DD /* OHHTTPStubs+NSURLSessionConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OHHTTPStubs+NSURLSessionConfiguration.m"; sourceTree = "<group>"; };
+		691E35592369CB2D0077E7DD /* Boxcar-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Boxcar-Prefix.pch"; sourceTree = "<group>"; };
+		691E35662369DFE70077E7DD /* BXCUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BXCUtilities.h; sourceTree = "<group>"; };
+		691E35672369DFE70077E7DD /* BXCUtilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BXCUtilities.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -21,6 +215,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				691E34DC2369C9C10077E7DD /* libOCMock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,10 +241,211 @@
 		691E34092369C9890077E7DD /* Boxcar */ = {
 			isa = PBXGroup;
 			children = (
+				691E35592369CB2D0077E7DD /* Boxcar-Prefix.pch */,
 				691E340A2369C9890077E7DD /* Boxcar.h */,
+				691E345F2369C9B50077E7DD /* Boxcar.m */,
+				691E34132369C9AD0077E7DD /* BXCConstants.h */,
+				691E34352369C9AD0077E7DD /* BXCConstants.m */,
+				691E34142369C9AD0077E7DD /* BXCEventStream.h */,
+				691E34342369C9AD0077E7DD /* BXCEventStream.m */,
+				691E34372369C9AD0077E7DD /* BXCJSON.h */,
+				691E34162369C9AD0077E7DD /* BXCJSON.m */,
+				691E34302369C9AD0077E7DD /* BXCLogging.h */,
+				691E34362369C9AD0077E7DD /* BXCLogging.m */,
+				691E34382369C9AD0077E7DD /* BXCMacros.h */,
+				691E34172369C9AD0077E7DD /* BXCMobileProvision.h */,
+				691E34122369C9AD0077E7DD /* BXCMobileProvision.m */,
+				691E34332369C9AD0077E7DD /* BXCPersistence.h */,
+				691E34312369C9AD0077E7DD /* BXCPersistence.m */,
+				691E34322369C9AD0077E7DD /* BXCSettings.h */,
+				691E342F2369C9AD0077E7DD /* BXCSettings.m */,
+				691E342E2369C9AD0077E7DD /* BXCSignature.h */,
+				691E34152369C9AD0077E7DD /* BXCSignature.m */,
+				691E35662369DFE70077E7DD /* BXCUtilities.h */,
+				691E35672369DFE70077E7DD /* BXCUtilities.m */,
 				691E340B2369C9890077E7DD /* Info.plist */,
+				691E34612369C9C10077E7DD /* Libraries */,
 			);
 			path = Boxcar;
+			sourceTree = "<group>";
+		};
+		691E34612369C9C10077E7DD /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				691E35092369CAB70077E7DD /* OHHTTPStubs */,
+				691E34622369C9C10077E7DD /* ECLogging */,
+				691E34862369C9C10077E7DD /* libOCMock.a */,
+				691E34872369C9C10077E7DD /* AFNetworking */,
+				691E34B12369C9C10077E7DD /* OCMock */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		691E34622369C9C10077E7DD /* ECLogging */ = {
+			isa = PBXGroup;
+			children = (
+				691E34632369C9C10077E7DD /* Prefix */,
+				691E34672369C9C10077E7DD /* Generic */,
+			);
+			path = ECLogging;
+			sourceTree = "<group>";
+		};
+		691E34632369C9C10077E7DD /* Prefix */ = {
+			isa = PBXGroup;
+			children = (
+				691E34642369C9C10077E7DD /* ECLoggingDebug.pch */,
+				691E34652369C9C10077E7DD /* ECLoggingShared.pch */,
+				691E34662369C9C10077E7DD /* ECLoggingRelease.pch */,
+			);
+			path = Prefix;
+			sourceTree = "<group>";
+		};
+		691E34672369C9C10077E7DD /* Generic */ = {
+			isa = PBXGroup;
+			children = (
+				691E34682369C9C10077E7DD /* ECErrorReporter.h */,
+				691E34692369C9C10077E7DD /* ECLogChannel.h */,
+				691E346A2369C9C10077E7DD /* ECErrorAndMessage.h */,
+				691E346B2369C9C10077E7DD /* ECLogManager.h */,
+				691E346C2369C9C10077E7DD /* ECLoggingGeneric.h */,
+				691E346D2369C9C10077E7DD /* ECLogHandler.m */,
+				691E346E2369C9C10077E7DD /* ECLogContext.h */,
+				691E346F2369C9C10077E7DD /* ECAssertion.h */,
+				691E34702369C9C10077E7DD /* ECASLClient.m */,
+				691E34712369C9C10077E7DD /* ECMacros.h */,
+				691E34722369C9C10077E7DD /* ECLogChannel.m */,
+				691E34732369C9C10077E7DD /* ECErrorReporter.m */,
+				691E34742369C9C10077E7DD /* ECLogging.m */,
+				691E34752369C9C10077E7DD /* ECLogHandler.h */,
+				691E34762369C9C10077E7DD /* ECLogManager.m */,
+				691E34772369C9C10077E7DD /* ECErrorAndMessage.m */,
+				691E34782369C9C10077E7DD /* Handlers */,
+				691E34832369C9C10077E7DD /* ECASLClient.h */,
+				691E34842369C9C10077E7DD /* ECAssertion.m */,
+				691E34852369C9C10077E7DD /* ECLoggingMacros.h */,
+			);
+			path = Generic;
+			sourceTree = "<group>";
+		};
+		691E34782369C9C10077E7DD /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				691E34792369C9C10077E7DD /* ECLogHandlerStdout.h */,
+				691E347A2369C9C10077E7DD /* ECLogHandlerStderr.m */,
+				691E347B2369C9C10077E7DD /* ECLogHandlerFile.h */,
+				691E347C2369C9C10077E7DD /* ECLogHandlerNSLog.h */,
+				691E347D2369C9C10077E7DD /* ECLogHandlerASL.h */,
+				691E347E2369C9C10077E7DD /* ECLogHandlerStdout.m */,
+				691E347F2369C9C10077E7DD /* ECLogHandlerNSLog.m */,
+				691E34802369C9C10077E7DD /* ECLogHandlerFile.m */,
+				691E34812369C9C10077E7DD /* ECLogHandlerStderr.h */,
+				691E34822369C9C10077E7DD /* ECLogHandlerASL.m */,
+			);
+			path = Handlers;
+			sourceTree = "<group>";
+		};
+		691E34872369C9C10077E7DD /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				691E34882369C9C10077E7DD /* BXCJSONRequestOperation.h */,
+				691E34892369C9C10077E7DD /* BXCHTTPClient.m */,
+				691E348A2369C9C10077E7DD /* BXCXMLRequestOperation.m */,
+				691E348B2369C9C10077E7DD /* BXCImageRequestOperation.m */,
+				691E348C2369C9C10077E7DD /* BXCNetworkActivityIndicatorManager.m */,
+				691E348D2369C9C10077E7DD /* UIImageView+BXCNetworking.h */,
+				691E348E2369C9C10077E7DD /* BXCURLConnectionOperation.h */,
+				691E348F2369C9C10077E7DD /* BXCPropertyListRequestOperation.h */,
+				691E34902369C9C10077E7DD /* BXCHTTPRequestOperation.h */,
+				691E34912369C9C10077E7DD /* BXCImageRequestOperation.h */,
+				691E34922369C9C10077E7DD /* BXCXMLRequestOperation.h */,
+				691E34932369C9C10077E7DD /* BXCHTTPClient.h */,
+				691E34942369C9C10077E7DD /* BXCJSONRequestOperation.m */,
+				691E34952369C9C10077E7DD /* BXCNetworkActivityIndicatorManager.h */,
+				691E34962369C9C10077E7DD /* BXCPropertyListRequestOperation.m */,
+				691E34972369C9C10077E7DD /* BXCURLConnectionOperation.m */,
+				691E34982369C9C10077E7DD /* BXCNetworking.h */,
+				691E34992369C9C10077E7DD /* UIImageView+BXCNetworking.m */,
+				691E349A2369C9C10077E7DD /* BXCHTTPRequestOperation.m */,
+			);
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		691E34B12369C9C10077E7DD /* OCMock */ = {
+			isa = PBXGroup;
+			children = (
+				691E34B22369C9C10077E7DD /* OCMockObject.h */,
+				691E34B32369C9C10077E7DD /* OCMMacroState.h */,
+				691E34B42369C9C10077E7DD /* OCMock.h */,
+				691E34B52369C9C10077E7DD /* NSNotificationCenter+OCMAdditions.h */,
+				691E34B62369C9C10077E7DD /* OCMFunctions.h */,
+				691E34B72369C9C10077E7DD /* OCMStubRecorder.h */,
+				691E34B82369C9C10077E7DD /* OCMRecorder.h */,
+				691E34B92369C9C10077E7DD /* OCMLocation.h */,
+				691E34BA2369C9C10077E7DD /* OCMConstraint.h */,
+				691E34BB2369C9C10077E7DD /* OCMArg.h */,
+			);
+			path = OCMock;
+			sourceTree = "<group>";
+		};
+		691E35092369CAB70077E7DD /* OHHTTPStubs */ = {
+			isa = PBXGroup;
+			children = (
+				691E350A2369CAB70077E7DD /* Compatibility.h */,
+				691E350B2369CAB70077E7DD /* OHHTTPStubsResponse.h */,
+				691E350C2369CAB70077E7DD /* OHHTTPStubs.m */,
+				691E350D2369CAB70077E7DD /* HTTPMessage */,
+				691E35102369CAB70077E7DD /* Mocktail */,
+				691E35132369CAB70077E7DD /* JSON */,
+				691E35182369CAB70077E7DD /* OHPathHelpers */,
+				691E351B2369CAB70077E7DD /* OHHTTPStubsResponse.m */,
+				691E351C2369CAB70077E7DD /* OHHTTPStubs.h */,
+				691E351D2369CAB70077E7DD /* NSURLSession */,
+			);
+			path = OHHTTPStubs;
+			sourceTree = "<group>";
+		};
+		691E350D2369CAB70077E7DD /* HTTPMessage */ = {
+			isa = PBXGroup;
+			children = (
+				691E350E2369CAB70077E7DD /* OHHTTPStubsResponse+HTTPMessage.h */,
+				691E350F2369CAB70077E7DD /* OHHTTPStubsResponse+HTTPMessage.m */,
+			);
+			path = HTTPMessage;
+			sourceTree = "<group>";
+		};
+		691E35102369CAB70077E7DD /* Mocktail */ = {
+			isa = PBXGroup;
+			children = (
+				691E35112369CAB70077E7DD /* OHHTTPStubs+Mocktail.h */,
+				691E35122369CAB70077E7DD /* OHHTTPStubs+Mocktail.m */,
+			);
+			path = Mocktail;
+			sourceTree = "<group>";
+		};
+		691E35132369CAB70077E7DD /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				691E35142369CAB70077E7DD /* OHHTTPStubsResponse+JSON.m */,
+				691E35152369CAB70077E7DD /* OHHTTPStubsResponse+JSON.h */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		691E35182369CAB70077E7DD /* OHPathHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				691E35192369CAB70077E7DD /* OHPathHelpers.m */,
+				691E351A2369CAB70077E7DD /* OHPathHelpers.h */,
+			);
+			path = OHPathHelpers;
+			sourceTree = "<group>";
+		};
+		691E351D2369CAB70077E7DD /* NSURLSession */ = {
+			isa = PBXGroup;
+			children = (
+				691E351E2369CAB70077E7DD /* OHHTTPStubs+NSURLSessionConfiguration.m */,
+			);
+			path = NSURLSession;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -59,6 +455,63 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				691E34D22369C9C10077E7DD /* ECLogHandlerNSLog.h in Headers */,
+				691E34E82369C9C10077E7DD /* BXCHTTPClient.h in Headers */,
+				691E34592369C9AD0077E7DD /* BXCPersistence.h in Headers */,
+				691E34DD2369C9C10077E7DD /* BXCJSONRequestOperation.h in Headers */,
+				691E34E52369C9C10077E7DD /* BXCHTTPRequestOperation.h in Headers */,
+				691E34582369C9AD0077E7DD /* BXCSettings.h in Headers */,
+				691E343E2369C9AD0077E7DD /* BXCMobileProvision.h in Headers */,
+				691E34ED2369C9C10077E7DD /* BXCNetworking.h in Headers */,
+				691E34E62369C9C10077E7DD /* BXCImageRequestOperation.h in Headers */,
+				691E345E2369C9AD0077E7DD /* BXCMacros.h in Headers */,
+				691E34542369C9AD0077E7DD /* BXCSignature.h in Headers */,
+				691E34E72369C9C10077E7DD /* BXCXMLRequestOperation.h in Headers */,
+				691E34562369C9AD0077E7DD /* BXCLogging.h in Headers */,
+				691E343A2369C9AD0077E7DD /* BXCConstants.h in Headers */,
+				691E35682369DFE70077E7DD /* BXCUtilities.h in Headers */,
+				691E34E42369C9C10077E7DD /* BXCPropertyListRequestOperation.h in Headers */,
+				691E343B2369C9AD0077E7DD /* BXCEventStream.h in Headers */,
+				691E345D2369C9AD0077E7DD /* BXCJSON.h in Headers */,
+				691E34E32369C9C10077E7DD /* BXCURLConnectionOperation.h in Headers */,
+				691E34EA2369C9C10077E7DD /* BXCNetworkActivityIndicatorManager.h in Headers */,
+				691E34CC2369C9C10077E7DD /* ECLogHandler.h in Headers */,
+				691E34C02369C9C10077E7DD /* ECLogChannel.h in Headers */,
+				691E34D32369C9C10077E7DD /* ECLogHandlerASL.h in Headers */,
+				691E34D12369C9C10077E7DD /* ECLogHandlerFile.h in Headers */,
+				691E35082369C9C10077E7DD /* OCMArg.h in Headers */,
+				691E352C2369CAB70077E7DD /* OHHTTPStubs.h in Headers */,
+				691E34C32369C9C10077E7DD /* ECLoggingGeneric.h in Headers */,
+				691E352A2369CAB70077E7DD /* OHPathHelpers.h in Headers */,
+				691E34BD2369C9C10077E7DD /* ECLoggingShared.pch in Headers */,
+				691E34DB2369C9C10077E7DD /* ECLoggingMacros.h in Headers */,
+				691E34E22369C9C10077E7DD /* UIImageView+BXCNetworking.h in Headers */,
+				691E35222369CAB70077E7DD /* OHHTTPStubsResponse+HTTPMessage.h in Headers */,
+				691E34C52369C9C10077E7DD /* ECLogContext.h in Headers */,
+				691E34BF2369C9C10077E7DD /* ECErrorReporter.h in Headers */,
+				691E35012369C9C10077E7DD /* OCMock.h in Headers */,
+				691E34C82369C9C10077E7DD /* ECMacros.h in Headers */,
+				691E35042369C9C10077E7DD /* OCMStubRecorder.h in Headers */,
+				691E34C22369C9C10077E7DD /* ECLogManager.h in Headers */,
+				691E35272369CAB70077E7DD /* OHHTTPStubsResponse+JSON.h in Headers */,
+				691E35202369CAB70077E7DD /* OHHTTPStubsResponse.h in Headers */,
+				691E35002369C9C10077E7DD /* OCMMacroState.h in Headers */,
+				691E34D92369C9C10077E7DD /* ECASLClient.h in Headers */,
+				691E35032369C9C10077E7DD /* OCMFunctions.h in Headers */,
+				691E34CF2369C9C10077E7DD /* ECLogHandlerStdout.h in Headers */,
+				691E34C62369C9C10077E7DD /* ECAssertion.h in Headers */,
+				691E35022369C9C10077E7DD /* NSNotificationCenter+OCMAdditions.h in Headers */,
+				691E34C12369C9C10077E7DD /* ECErrorAndMessage.h in Headers */,
+				691E35242369CAB70077E7DD /* OHHTTPStubs+Mocktail.h in Headers */,
+				691E34BC2369C9C10077E7DD /* ECLoggingDebug.pch in Headers */,
+				691E351F2369CAB70077E7DD /* Compatibility.h in Headers */,
+				691E34D72369C9C10077E7DD /* ECLogHandlerStderr.h in Headers */,
+				691E35052369C9C10077E7DD /* OCMRecorder.h in Headers */,
+				691E34FF2369C9C10077E7DD /* OCMockObject.h in Headers */,
+				691E35062369C9C10077E7DD /* OCMLocation.h in Headers */,
+				691E34BE2369C9C10077E7DD /* ECLoggingRelease.pch in Headers */,
+				691E355A2369CB2D0077E7DD /* Boxcar-Prefix.pch in Headers */,
+				691E35072369C9C10077E7DD /* OCMConstraint.h in Headers */,
 				691E340C2369C9890077E7DD /* Boxcar.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -131,6 +584,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				691E34D62369C9C10077E7DD /* ECLogHandlerFile.m in Sources */,
+				691E34EC2369C9C10077E7DD /* BXCURLConnectionOperation.m in Sources */,
+				691E35252369CAB70077E7DD /* OHHTTPStubs+Mocktail.m in Sources */,
+				691E34DA2369C9C10077E7DD /* ECAssertion.m in Sources */,
+				691E34EF2369C9C10077E7DD /* BXCHTTPRequestOperation.m in Sources */,
+				691E352D2369CAB70077E7DD /* OHHTTPStubs+NSURLSessionConfiguration.m in Sources */,
+				691E34CE2369C9C10077E7DD /* ECErrorAndMessage.m in Sources */,
+				691E34602369C9B50077E7DD /* Boxcar.m in Sources */,
+				691E34CB2369C9C10077E7DD /* ECLogging.m in Sources */,
+				691E34DE2369C9C10077E7DD /* BXCHTTPClient.m in Sources */,
+				691E34E12369C9C10077E7DD /* BXCNetworkActivityIndicatorManager.m in Sources */,
+				691E34572369C9AD0077E7DD /* BXCPersistence.m in Sources */,
+				691E34D52369C9C10077E7DD /* ECLogHandlerNSLog.m in Sources */,
+				691E34D02369C9C10077E7DD /* ECLogHandlerStderr.m in Sources */,
+				691E35212369CAB70077E7DD /* OHHTTPStubs.m in Sources */,
+				691E34CA2369C9C10077E7DD /* ECErrorReporter.m in Sources */,
+				691E35692369DFE70077E7DD /* BXCUtilities.m in Sources */,
+				691E35232369CAB70077E7DD /* OHHTTPStubsResponse+HTTPMessage.m in Sources */,
+				691E35262369CAB70077E7DD /* OHHTTPStubsResponse+JSON.m in Sources */,
+				691E34C92369C9C10077E7DD /* ECLogChannel.m in Sources */,
+				691E345B2369C9AD0077E7DD /* BXCConstants.m in Sources */,
+				691E343C2369C9AD0077E7DD /* BXCSignature.m in Sources */,
+				691E345C2369C9AD0077E7DD /* BXCLogging.m in Sources */,
+				691E345A2369C9AD0077E7DD /* BXCEventStream.m in Sources */,
+				691E34D82369C9C10077E7DD /* ECLogHandlerASL.m in Sources */,
+				691E34EB2369C9C10077E7DD /* BXCPropertyListRequestOperation.m in Sources */,
+				691E35292369CAB70077E7DD /* OHPathHelpers.m in Sources */,
+				691E343D2369C9AD0077E7DD /* BXCJSON.m in Sources */,
+				691E34552369C9AD0077E7DD /* BXCSettings.m in Sources */,
+				691E34392369C9AD0077E7DD /* BXCMobileProvision.m in Sources */,
+				691E34DF2369C9C10077E7DD /* BXCXMLRequestOperation.m in Sources */,
+				691E34C42369C9C10077E7DD /* ECLogHandler.m in Sources */,
+				691E352B2369CAB70077E7DD /* OHHTTPStubsResponse.m in Sources */,
+				691E34E92369C9C10077E7DD /* BXCJSONRequestOperation.m in Sources */,
+				691E34D42369C9C10077E7DD /* ECLogHandlerStdout.m in Sources */,
+				691E34CD2369C9C10077E7DD /* ECLogManager.m in Sources */,
+				691E34C72369C9C10077E7DD /* ECASLClient.m in Sources */,
+				691E34EE2369C9C10077E7DD /* UIImageView+BXCNetworking.m in Sources */,
+				691E34E02369C9C10077E7DD /* BXCImageRequestOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +680,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -243,7 +735,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -262,6 +754,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Boxcar/Boxcar-Prefix.pch";
 				INFOPLIST_FILE = Boxcar/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -269,9 +763,14 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Boxcar/Libraries",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Boxcar;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -285,6 +784,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Boxcar/Boxcar-Prefix.pch";
 				INFOPLIST_FILE = Boxcar/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -292,9 +793,14 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Boxcar/Libraries",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Boxcar;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
