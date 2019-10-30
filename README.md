@@ -11,4 +11,4 @@ run **lipo -create path/to/physical path/to/simulator -output Boxcar**
 
 then copy the whole .framework folder with the new Boxcar binary into your project.
 
-##Do not forget to "Embed it" in your project general library and framework.
+## Do not forget to "Embed it" in your project general library and framework.
