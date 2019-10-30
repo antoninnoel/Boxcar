@@ -50,7 +50,7 @@ typedef NS_ENUM(NSUInteger, BXCAPNSService) {
 @interface Boxcar : NSObject <BXCEventStreamDelegate>
 
 @property(nonatomic, weak) id <BoxcarDelegate> delegate;
-@property(nonatomic, weak) id <UNUserNotificationCenterDelegate> NCDelegate;
+@property(nonatomic, weak) id <UNUserNotificationCenterDelegate> NCDelegate API_AVAILABLE(ios(10.0));
 
 @property(nonatomic, copy)   NSString *clientKey;
 @property(nonatomic, copy)   NSString *clientSecret;
@@ -69,12 +69,11 @@ typedef NS_ENUM(NSUInteger, BXCAPNSService) {
 /**
  Always used the shared instance class method to access Boxcar instance singleton.
  */
-+ (id)sharedInstance;
++ (Boxcar *)sharedInstance;
 
 /**
  *  Setup the Boxcar service assuming all options are read from BoxcarConfig.plist in application NSBundle.
  *
- *  @return YES if registration was handled properly by Boxcar framework.
  */
 - (void)setup;
 
@@ -85,9 +84,7 @@ typedef NS_ENUM(NSUInteger, BXCAPNSService) {
 *
 *  @warning You must start the Boxcar service from the applicationDidLoad:withOptions method in your App Delegate.
 *
-*  @param options NSDictionary containing valid options
 *
-*  @return YES if registration was handled properly by Boxcar framework.
 *
 <pre>
 @textblock

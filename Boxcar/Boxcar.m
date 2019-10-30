@@ -43,7 +43,7 @@
 @synthesize mode = _mode;
 
 /* Always used the shared instance class method to access Boxcar instance singleton. */
-+ (id)sharedInstance {
++ (Boxcar *)sharedInstance {
     static Boxcar *sharedInstance = nil;
     static dispatch_once_t token;
     
